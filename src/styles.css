@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Silkscreen", ui-monospace, monospace;
+
+  --color-bg: #14110e;
+  --color-surface: #221c17;
+  --color-surface-2: #2c241d;
+  --color-fg: #f6efe4;
+  --color-muted: #b7a79a;
+  --color-primary: #e07a3d;
+  --color-primary-fg: #1a120c;
+  --color-border: #3a3028;
+  --color-checker-a: #e7dccd;
+  --color-checker-b: #cfc3b2;
+
+  --radius-lg: 0.75rem;
+}
+
+:root {
+  --grid-line: rgb(28 22 18 / 32%);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+  }
+}
+
+.pixel-checker {
+  background-color: var(--color-checker-a);
+  background-image: repeating-conic-gradient(
+    var(--color-checker-b) 0% 25%,
+    transparent 0% 50%
+  );
+  background-size: calc(var(--cell, 16px) * 2) calc(var(--cell, 16px) * 2);
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.safe-top {
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+}
+
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+.stage {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
